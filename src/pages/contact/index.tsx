@@ -1,9 +1,8 @@
-import ContactUs from "@widgets/sections/ContactUs.tsx";
 
 function Contact() {
     return (
         <>
-            <ContactUs/>
+            Contact us page
         </>
     )
 }

@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {Button} from "@headlessui/react";
+import {Button} from "@shared/components/ui/button.tsx";
 
 export interface TestimonialInterface {
     id: number;
@@ -22,6 +22,7 @@ const Testimonial: FC<TestimonialProps> = ({testimonial, onClick}) => {
             ))}
             <div className='mt-4'>
                 <Button
+                    variant={'ghost'}
                     className='block w-full bg-indigo-600 text-white p-2 rounded-md group-hover:text-indigo-600 group-hover:bg-white cursor-pointer active:bg-teal-300'
                     onClick={onClick}>Click me</Button>
             </div>

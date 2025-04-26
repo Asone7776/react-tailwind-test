@@ -7,5 +7,43 @@
     {
       "path": "./tsconfig.node.json"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@app/*": [
+        "./src/app/*"
+      ],
+      "@entities/*": [
+        "./src/entities/*"
+      ],
+      "@features/*": [
+        "./src/features/*"
+      ],
+      "@shared/*": [
+        "./src/shared/*"
+      ],
+      "@pages/*": [
+        "./src/pages/*"
+      ],
+      "@widgets/*": [
+        "./src/widgets/*"
+      ],
+      "@processes/*": [
+        "./src/processes/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@layouts/*": [
+        "./src/layouts/*"
+      ],
+      "@custom-types/*": [
+        "./src/custom-types/*"
+      ]
+    }
+  }
 }

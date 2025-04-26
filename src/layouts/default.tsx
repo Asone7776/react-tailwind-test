@@ -1,15 +1,21 @@
-import Header from "@widgets/header/index.tsx";
-import { Outlet } from "react-router-dom";
+import {AppSidebar} from "@shared/components/sidebar/app-sidebar";
+// import { ChartAreaInteractive } from "@/components/chart-area-interactive"
+// import { DataTable } from "@/components/data-table"
+// import { SectionCards } from "@/components/section-cards"
+import { SiteHeader } from "@widgets/header";
+import {SidebarInset, SidebarProvider} from "@shared/components/ui/sidebar"
+import {Outlet} from "react-router";
 
-function Default() {
+export default function Page() {
     return (
-        <>
-            <Header/>
-            <main>
-                <Outlet/>
-            </main>
-        </>
-    );
+        <SidebarProvider>
+            <AppSidebar variant="inset"/>
+            <SidebarInset>
+                <SiteHeader />
+                <main>
+                    <Outlet/>
+                </main>
+            </SidebarInset>
+        </SidebarProvider>
+    )
 }
-
-export default Default;

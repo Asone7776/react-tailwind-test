@@ -3,7 +3,7 @@ import {testimonials_data} from "@utils/data.ts";
 
 function Testimonials() {
     const handleClick = (data: TestimonialInterface) => {
-        alert(JSON.stringify(data));
+        alert(JSON.stringify(data, null, 2));
     }
     const listItems = testimonials_data.map((item) => <Testimonial key={item.id} testimonial={item}
                                                                    onClick={() => handleClick(item)}/>)
