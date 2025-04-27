@@ -2,15 +2,14 @@
 
 import * as React from "react"
 import {
-    ArrowUpCircleIcon,
     CameraIcon,
     FileCodeIcon,
     FileTextIcon,
     HelpCircleIcon,
-    LayoutDashboardIcon,
     ListIcon,
     SearchIcon,
     SettingsIcon,
+    HomeIcon, Wrench,
 } from "lucide-react"
 
 import {NavMain} from "@shared/components/navigation/main";
@@ -36,13 +35,13 @@ const data = {
     },
     navMain: [
         {
-            title: "Dashboard",
-            url: "/",
-            icon: LayoutDashboardIcon,
+            title: "Home",
+            url: "/admin",
+            icon: HomeIcon,
         },
         {
             title: "Contacts",
-            url: "/contacts",
+            url: "/admin/contacts",
             icon: ListIcon,
         },
     ],
@@ -124,7 +123,7 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                             className="data-[slot=sidebar-menu-button]:!p-1.5"
                         >
                             <Link to="/">
-                                <ArrowUpCircleIcon className="h-5 w-5"/>
+                                <Wrench className="h-5 w-5"/>
                                 <span className="text-base font-semibold">Servi</span>
                             </Link>
                         </SidebarMenuButton>

@@ -15,10 +15,6 @@ export function SiteHeader() {
                     className="mx-2 data-[orientation=vertical]:h-4"
                 />
                 <h1 className="text-base font-medium">{current?.handle?.title ?? null}</h1>
-                <Separator
-                    orientation="vertical"
-                    className="mx-2 data-[orientation=vertical]:h-4"
-                />
                 <div className={'ml-auto mr-0'}>
                     <ModeToggle/>
                 </div>

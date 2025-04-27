@@ -1,13 +1,14 @@
 import axios from 'axios';
-import * as process from "node:process";
+import {AUTH_COOKIE_NAME} from "@utils/constants.ts";
+import Cookies from 'js-cookie';
 
 export const instance = axios.create({
-    baseURL: process.env.BASE_URL,
+    baseURL: import.meta.env.BASE_URL,
 });
 
 instance.interceptors.request.use(
     config => {
-        const token = localStorage.getItem('token');
+        const token = Cookies.get(AUTH_COOKIE_NAME);
         if (token) {
             config.headers.authorization = `Bearer ${token}`;
         }
@@ -17,15 +18,16 @@ instance.interceptors.request.use(
         return Promise.reject(error);
     }
 )
+
 instance.interceptors.response.use(
-    (response) => response,
-    error => {
-        return Promise.reject(error);
-        // if (error.response.status === 401) {
-        //
-        // }
-        // if (error.response.status === 500) {
-        //     console.error(error);
-        // }
-    }
-)
+    (response) => {
+        return response
+    },
+    (error) => {
+        const status = (error.response && error.response.status) || 0;
+        if (status === 401 && window.location.pathname !== "/") {
+            Cookies.remove("token");
+            window.location.href = '/';
+        }
+        return Promise.reject(error)
+    });
