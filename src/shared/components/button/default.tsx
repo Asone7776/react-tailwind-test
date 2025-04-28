@@ -1,5 +1,5 @@
 import {FC} from 'react'
-import {Button} from '@headlessui/react';
+import {Button} from '@shared/components/ui/button';
 import ButtonSpinner from "@shared/components/spinners/button-spinner.tsx";
 import {ButtonTypes} from "@custom-types/enums.ts";
 import cn from 'clsx';

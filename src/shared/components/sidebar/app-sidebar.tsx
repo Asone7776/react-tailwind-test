@@ -36,7 +36,7 @@ const data = {
     navMain: [
         {
             title: "Home",
-            url: "/admin",
+            url: "/admin/",
             icon: HomeIcon,
         },
         {
@@ -122,7 +122,7 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                             asChild
                             className="data-[slot=sidebar-menu-button]:!p-1.5"
                         >
-                            <Link to="/">
+                            <Link to="/admin/" viewTransition>
                                 <Wrench className="h-5 w-5"/>
                                 <span className="text-base font-semibold">Servi</span>
                             </Link>

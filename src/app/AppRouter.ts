@@ -1,17 +1,21 @@
+import {lazy} from "react";
 import {createBrowserRouter} from "react-router";
-import Home from "@pages/home";
-import Contact from "@pages/contact";
-import Default from "@layouts/default.tsx";
-import AuthLayout from "@layouts/auth.tsx";
-import Index from "@pages/auth";
+
+const Home = lazy(() => import("@pages/home"));
+const Contact = lazy(() => import("@pages/contact"));
+const Default = lazy(() => import("@layouts/default"));
+const AuthLayout = lazy(() => import("@layouts/auth"));
+const Index = lazy(() => import("@pages/auth"));
+const NotFound = lazy(() => import("@pages/not-found"));
+
 
 export const router = createBrowserRouter([
     {
         path: "admin",
         Component: Default,
         children: [
-            {index: true, Component: Home,handle:{title:'Главная'}},
-            {path: 'contacts', Component: Contact,handle:{title:'Контакты'}},
+            {index: true, Component: Home, handle: {title: 'Главная'}},
+            {path: 'contacts', Component: Contact, handle: {title: 'Контакты'}},
         ],
     },
     {
@@ -21,4 +25,8 @@ export const router = createBrowserRouter([
             {index: true, Component: Index},
         ],
     },
+    {
+        path: "*",
+        Component: NotFound
+    }
 ]);

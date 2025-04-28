@@ -30,7 +30,7 @@ export function NavMain({
                 <SidebarMenu>
                     {items.map((item) => (
                         <SidebarMenuItem key={item.title}>
-                            <NavLink to={item.url}>
+                            <NavLink to={item.url} viewTransition>
                                 <SidebarMenuButton className={'cursor-pointer'} tooltip={item.title}
                                                    isActive={item.url === current?.pathname}>
                                     {item.icon &&
