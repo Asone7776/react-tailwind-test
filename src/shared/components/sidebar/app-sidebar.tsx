@@ -1,15 +1,14 @@
 "use client"
 
 import * as React from "react"
+import {ROUTES} from "@utils/constants.ts";
 import {
-    CameraIcon,
-    FileCodeIcon,
-    FileTextIcon,
-    HelpCircleIcon,
-    ListIcon,
-    SearchIcon,
-    SettingsIcon,
-    HomeIcon, Wrench,
+    HomeIcon,
+    Building2Icon,
+    NetworkIcon,
+    ShieldCheckIcon,
+    ShoppingCartIcon,
+    Wrench,
 } from "lucide-react"
 
 import {NavMain} from "@shared/components/navigation/main";
@@ -35,81 +34,31 @@ const data = {
     },
     navMain: [
         {
-            title: "Home",
-            url: "/admin/",
+            title: "Главная",
+            url: `/${ROUTES.MAIN}/`,
             icon: HomeIcon,
         },
         {
-            title: "Contacts",
-            url: "/admin/contacts",
-            icon: ListIcon,
-        },
-    ],
-    navClouds: [
-        {
-            title: "Capture",
-            icon: CameraIcon,
-            isActive: true,
-            url: "#",
-            items: [
-                {
-                    title: "Active Proposals",
-                    url: "#",
-                },
-                {
-                    title: "Archived",
-                    url: "#",
-                },
-            ],
+            title: "Компании",
+            url: `/${ROUTES.MAIN}/${ROUTES.COMPANIES}`,
+            icon: Building2Icon,
         },
         {
-            title: "Proposal",
-            icon: FileTextIcon,
-            url: "#",
-            items: [
-                {
-                    title: "Active Proposals",
-                    url: "#",
-                },
-                {
-                    title: "Archived",
-                    url: "#",
-                },
-            ],
+            title: "Филиалы",
+            url: `/${ROUTES.MAIN}/${ROUTES.BRANCHES}`,
+            icon: NetworkIcon,
         },
         {
-            title: "Prompts",
-            icon: FileCodeIcon,
-            url: "#",
-            items: [
-                {
-                    title: "Active Proposals",
-                    url: "#",
-                },
-                {
-                    title: "Archived",
-                    url: "#",
-                },
-            ],
-        },
-    ],
-    navSecondary: [
-        {
-            title: "Settings",
-            url: "#",
-            icon: SettingsIcon,
+            title: "Роли",
+            url: `/${ROUTES.MAIN}/${ROUTES.ROLES}`,
+            icon: ShieldCheckIcon,
         },
         {
-            title: "Get Help",
-            url: "#",
-            icon: HelpCircleIcon,
+            title: "Заказы",
+            url: `/${ROUTES.MAIN}/${ROUTES.ORDERS}`,
+            icon: ShoppingCartIcon,
         },
-        {
-            title: "Search",
-            url: "#",
-            icon: SearchIcon,
-        },
-    ],
+    ]
 }
 
 export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {

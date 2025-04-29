@@ -4,6 +4,7 @@ import {AppSidebar} from "@shared/components/sidebar/app-sidebar";
 import {SiteHeader} from "@widgets/header";
 import {SidebarInset, SidebarProvider} from "@shared/components/ui/sidebar"
 import GlobalLoading from "@shared/components/loading/global.tsx";
+import OutletWrapper from "@shared/components/outlet-wrapper.tsx";
 
 export default function Page() {
     return (
@@ -11,11 +12,11 @@ export default function Page() {
             <AppSidebar variant="inset"/>
             <SidebarInset>
                 <SiteHeader/>
-                <main>
-                    <Suspense fallback={<GlobalLoading/>}>
+                <Suspense fallback={<GlobalLoading/>}>
+                    <OutletWrapper>
                         <Outlet/>
-                    </Suspense>
-                </main>
+                    </OutletWrapper>
+                </Suspense>
             </SidebarInset>
         </SidebarProvider>
     )

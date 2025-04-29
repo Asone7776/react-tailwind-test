@@ -1,8 +1,8 @@
 "use client"
 
+import {Link} from "react-router";
+import {MouseEvent} from "react";
 import {
-    BellIcon,
-    CreditCardIcon,
     LogOutIcon,
     MoreVerticalIcon,
     UserCircleIcon,
@@ -29,6 +29,7 @@ import {
     useSidebar,
 } from "@shared/components/ui/sidebar"
 
+
 export function NavUser({
                             user,
                         }: {
@@ -38,8 +39,11 @@ export function NavUser({
         avatar: string
     }
 }) {
-    const { isMobile } = useSidebar()
-
+    const {isMobile} = useSidebar()
+    const logout = (event: MouseEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        console.log(event);
+    }
     return (
         <SidebarMenu>
             <SidebarMenuItem>
@@ -50,7 +54,7 @@ export function NavUser({
                             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                         >
                             <Avatar className="h-8 w-8 rounded-lg grayscale">
-                                <AvatarImage src={user.avatar} alt={user.name} />
+                                <AvatarImage src={user.avatar} alt={user.name}/>
                                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                             </Avatar>
                             <div className="grid flex-1 text-left text-sm leading-tight">
@@ -59,7 +63,7 @@ export function NavUser({
                   {user.email}
                 </span>
                             </div>
-                            <MoreVerticalIcon className="ml-auto size-4" />
+                            <MoreVerticalIcon className="ml-auto size-4"/>
                         </SidebarMenuButton>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
@@ -71,7 +75,7 @@ export function NavUser({
                         <DropdownMenuLabel className="p-0 font-normal">
                             <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                                 <Avatar className="h-8 w-8 rounded-lg">
-                                    <AvatarImage src={user.avatar} alt={user.name} />
+                                    <AvatarImage src={user.avatar} alt={user.name}/>
                                     <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                                 </Avatar>
                                 <div className="grid flex-1 text-left text-sm leading-tight">
@@ -82,25 +86,19 @@ export function NavUser({
                                 </div>
                             </div>
                         </DropdownMenuLabel>
-                        <DropdownMenuSeparator />
+                        <DropdownMenuSeparator/>
                         <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                <UserCircleIcon />
-                                Account
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <CreditCardIcon />
-                                Billing
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <BellIcon />
-                                Notifications
-                            </DropdownMenuItem>
+                            <Link to={'/admin/profile'} viewTransition>
+                                <DropdownMenuItem>
+                                    <UserCircleIcon/>
+                                    Профиль
+                                </DropdownMenuItem>
+                            </Link>
                         </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                            <LogOutIcon />
-                            Log out
+                        <DropdownMenuSeparator/>
+                        <DropdownMenuItem onClick={logout}>
+                            <LogOutIcon/>
+                            Выйти
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
