@@ -1,9 +1,10 @@
-import CompaniesList from '@features/admin/companies/list';
+import RecipesList from '@features/admin/recipe/list';
 
 function CompaniesPage() {
     return (
         <>
-            <CompaniesList/>
+            {/*<CompaniesList/>*/}
+            <RecipesList/>
         </>
     );
 }

@@ -4,9 +4,11 @@ export enum Models {
     branch = "branch",
     role = "role",
     order = "order",
+//     Test
+    recipe = "recipe"
 }
 
-interface ModelEntity {
+export interface ModelEntity {
     name: string,
     url: string,
 }
@@ -14,7 +16,7 @@ interface ModelEntity {
 export const ModelConfig: Record<Models, ModelEntity> = {
     user: {
         name: Models.user,
-        url: 'api/user',
+        url: 'api/users',
     },
     company: {
         name: Models.company,
@@ -32,4 +34,9 @@ export const ModelConfig: Record<Models, ModelEntity> = {
         name: Models.order,
         url: 'api/order',
     },
+    recipe: {
+        name: Models.recipe,
+        // url: 'https://dummyjson.com/recipes',
+        url: 'https://dummyjson.com/c/77bf-2da2-4b41-a207',
+    }
 }

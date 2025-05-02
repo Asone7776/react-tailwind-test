@@ -69,11 +69,14 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
                     <SidebarMenuItem>
                         <SidebarMenuButton
                             asChild
-                            className="data-[slot=sidebar-menu-button]:!p-1.5"
+                            className="pl-0"
                         >
-                            <Link to="/admin/" viewTransition>
-                                <Wrench className="h-5 w-5"/>
-                                <span className="text-base font-semibold">Servi</span>
+                            <Link to="/admin/" className="flex items-center font-medium" viewTransition>
+                                <div
+                                    className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                                    <Wrench className="size-6"/>
+                                </div>
+                                Servi
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>

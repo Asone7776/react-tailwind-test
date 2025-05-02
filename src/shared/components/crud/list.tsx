@@ -1,11 +1,10 @@
-import {FC, useEffect, useState} from 'react';
-import {Models} from "@shared/api/crud/models.ts";
-import TableSearch from "@shared/components/search/table-search.tsx";
-
-interface CrudListProps {
-    model: Models,
-    hasSearch?: boolean;
-}
+import {useCallback, useState} from 'react';
+import {CrudListParams} from "@custom-types/crud-list.ts";
+import CrudToolbar from "@shared/components/crud/toolbar";
+import CrudTable from "@shared/components/crud/table";
+import {instance} from "@shared/api/instance.ts";
+import {ResponseWithPagination} from "@custom-types/pagination.ts";
+import useSWR from "swr";
 
 interface QueryParams {
     search?: string;
@@ -13,29 +12,31 @@ interface QueryParams {
     limit?: number;
 }
 
-const CrudList: FC<CrudListProps> = () => {
+function CrudList<T, >({config, hasSearch, columns}: CrudListParams<T>) {
     const [query, setQuery] = useState<QueryParams>({});
-
-    const changeSearch = (value: string) => {
-        updateQuery('search', value);
-    };
-
-    const updateQuery = <T extends keyof QueryParams>(key: T, value: QueryParams[T]) => {
+    const {
+        data,
+    } = useSWR<ResponseWithPagination<T>>([config.url, query], ([url, query]) => instance.get(url, {
+        params: query
+    }));
+    const updateQuery = useCallback(<T extends keyof QueryParams>(key: T, value: QueryParams[T]) => {
         setQuery((prevState) => {
             return {
                 ...prevState,
                 [key]: value
             }
         })
-    }
+    }, []);
 
-    useEffect(() => {
-        console.log('query', query);
-    }, [query]);
+    const changeSearch = useCallback((value: string) => {
+        updateQuery('search', value);
+    }, [updateQuery]);
+
 
     return (
-        <div>
-            <TableSearch onChange={changeSearch}/>
+        <div className={'flex flex-col gap-4'}>
+            <CrudToolbar hasSearch={hasSearch} changeSearch={changeSearch}/>
+            {columns && <CrudTable<T> columns={columns} data={data?.data.data ?? []}/>}
         </div>
     );
 }
