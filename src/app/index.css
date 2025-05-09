@@ -121,7 +121,7 @@ html, body, #root {
 /*}*/
 
 @layer components {
-    [data-slot='button'] {
+    [data-slot='button'], [data-slot='dialog-close'] {
         @apply cursor-pointer;
     }
 

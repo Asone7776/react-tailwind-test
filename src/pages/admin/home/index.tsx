@@ -1,3 +1,4 @@
+
 const HomePage = () => {
     // const {data} = useSWR('https://dummyjson.com/recipes', (url) => instance.get(url, {
     //     params: {
@@ -6,7 +7,7 @@ const HomePage = () => {
     // }));
     return (
         <>
-            Lorem
+            {/*{t('test')}*/}
         </>
     )
 }

@@ -1,4 +1,5 @@
 import '@app/index.css';
+import "@app/locales/i18n.ts";
 import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import {RouterProvider} from "react-router";

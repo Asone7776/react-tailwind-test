@@ -10,6 +10,7 @@ import {useNavigate} from "react-router";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {LoginSchema, LoginFormFields} from "@features/auth/login/model/validation.ts";
+import {useTranslation} from "react-i18next";
 
 
 function LoginForm({
@@ -18,8 +19,8 @@ function LoginForm({
                    }: React.ComponentPropsWithoutRef<"form">) {
 
     const navigate = useNavigate();
-
-    const [passwordType, setPasswordType] = useState<string>('password');
+    const {t} = useTranslation();
+    const [passwordType, setPasswordType] = useState('password');
     const passwordIcon = passwordType === 'password' ? <EyeOff/> : <EyeIcon/>;
 
     const togglePassword = (event: ButtonClick) => {
@@ -41,11 +42,11 @@ function LoginForm({
     return (
         <form className={cn("flex flex-col gap-6", className)} {...props} onSubmit={handleSubmit(handleLogin)}>
             <div className="flex flex-col items-center gap-2 text-center">
-                <h1 className="text-2xl font-bold">Войдите в аккаунт</h1>
+                <h1 className="text-2xl font-bold">{t('enter_account')}</h1>
             </div>
             <div className="grid gap-6">
                 <div className="grid gap-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email">{t('fields.email')}</Label>
                     <Input {...register('email')} id="email"
                            placeholder="m@example.com"/>
 
@@ -53,10 +54,10 @@ function LoginForm({
                 </div>
                 <div className="grid gap-2">
                     <div className="flex items-center">
-                        <Label htmlFor="password">Пароль</Label>
+                        <Label htmlFor="password">{t('fields.password')}</Label>
                     </div>
                     <div className="flex w-full max-w-sm items-center space-x-2">
-                        <Input {...register('password')} type={passwordType} placeholder="Пароль"/>
+                        <Input {...register('password')} type={passwordType} placeholder={t('fields.password')}/>
                         <Button onClick={togglePassword}>
                             {passwordIcon}
                         </Button>
@@ -64,7 +65,7 @@ function LoginForm({
                     {errors?.password?.message && <ValidationAlert>{errors.password.message}</ValidationAlert>}
                 </div>
                 <Button type="submit" className="w-full">
-                    Войти
+                    {t('enter')}
                 </Button>
             </div>
         </form>

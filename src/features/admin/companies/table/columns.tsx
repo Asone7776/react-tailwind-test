@@ -19,21 +19,8 @@ export const columns: ColumnDef<Company>[] = [
         accessorKey: "status",
         header: "Статус",
     },
-]
-export const mockData = [
     {
-        id: 1,
-        name: "Beeline",
-        status: "pending",
+        accessorKey: "status",
+        header: "Статус",
     },
-    {
-        id: 2,
-        name: "Ucell",
-        status: "pending",
-    },
-    {
-        id: 3,
-        name: "Perfectum",
-        status: "pending",
-    },
-]
+];
