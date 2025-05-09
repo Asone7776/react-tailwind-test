@@ -47,17 +47,17 @@ function CrudList<T, >({config, hasSearch, columns, form}: CrudListParams<T>) {
         <div className={'flex flex-col gap-4'}>
             <CrudToolbar hasSearch={hasSearch} changeSearch={changeSearch}>
                 {form && (
-                    <Button onClick={() => changeDialogState(true)} variant={'secondary'}
-                            className={'ml-0 mr-auto hover:bg-primary hover:text-black'}>
-                        <PlusIcon/>
-                    </Button>
+                    <>
+                        <Button onClick={() => changeDialogState(true)} variant={'secondary'}
+                                className={'ml-0 mr-auto hover:bg-primary hover:text-black'}>
+                            <PlusIcon/>
+                        </Button>
+                        <CrudDialog open={dialog} onClose={() => changeDialogState(false)}>
+                            <UniversalForm {...form} />
+                        </CrudDialog>
+                    </>
                 )}
             </CrudToolbar>
-            {form && (
-                <CrudDialog open={dialog} onClose={() => changeDialogState(false)}>
-                    <UniversalForm {...form} />
-                </CrudDialog>
-            )}
             {columns && (
                 <CrudTable<T> columns={columns} data={data?.data.data ?? []}>
                     <CrudTablePagination/>
