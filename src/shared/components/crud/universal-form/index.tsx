@@ -23,9 +23,11 @@ function UniversalForm<TSchema extends z.ZodTypeAny>({schema}: UniversalFormProp
     return (
         <form onSubmit={handleSubmit(submitAction)}>
             {JSON.stringify(errors, null, 2)}
+            <div className={'flex justify-center'}>
             <Button type="submit">
                 {t('send')}
             </Button>
+            </div>
         </form>
     );
 }

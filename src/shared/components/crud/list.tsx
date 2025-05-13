@@ -1,31 +1,21 @@
 import {useCallback, useState} from 'react';
-import {CrudListParams} from "@custom-types/crud-list.ts";
+import {CrudListParams, QueryParams} from "@custom-types/crud-list.ts";
 import CrudToolbar from "@shared/components/crud/toolbar";
 import CrudTable from "@shared/components/crud/table";
 import CrudTablePagination from "@shared/components/crud/table/pagination";
-import {instance} from "@shared/api/instance.ts";
-import {ResponseWithPagination} from "@custom-types/pagination.ts";
-import useSWR from "swr";
 import CrudDialog from "@shared/components/crud/dialog";
 import {Button} from "@shared/components/ui/button.tsx";
 import {PlusIcon} from "lucide-react";
-import UniversalForm from "@shared/components/crud/universal-form";
+import CrudCreate from "@processes/crud/create";
+import {useCrud} from "@shared/hooks/useCrud.ts";
 
-
-interface QueryParams {
-    search?: string;
-    page?: number;
-    limit?: number;
-}
 
 function CrudList<T, >({config, hasSearch, columns, form}: CrudListParams<T>) {
     const [query, setQuery] = useState<QueryParams>({});
     const [dialog, setDialog] = useState(false);
-    const {
-        data,
-    } = useSWR<ResponseWithPagination<T>>([config.url, query], ([url, query]) => instance.get(url, {
-        params: query
-    }));
+    const {data, isLoading, refetch} = useCrud<T>(config.url, query);
+
+
     const updateQuery = useCallback(<T extends keyof QueryParams>(key: T, value: QueryParams[T]) => {
         setQuery((prevState) => {
             return {
@@ -41,11 +31,16 @@ function CrudList<T, >({config, hasSearch, columns, form}: CrudListParams<T>) {
 
     const changeDialogState = useCallback((value: boolean) => {
         setDialog(value);
-    }, [setDialog])
+    }, [setDialog]);
+
+
+    const onReload = useCallback(async () => {
+        await refetch();
+    }, [refetch]);
 
     return (
         <div className={'flex flex-col gap-4'}>
-            <CrudToolbar hasSearch={hasSearch} changeSearch={changeSearch}>
+            <CrudToolbar isLoading={isLoading} hasSearch={hasSearch} changeSearch={changeSearch} onRefresh={onReload}>
                 {form && (
                     <>
                         <Button onClick={() => changeDialogState(true)} variant={'secondary'}
@@ -53,13 +48,13 @@ function CrudList<T, >({config, hasSearch, columns, form}: CrudListParams<T>) {
                             <PlusIcon/>
                         </Button>
                         <CrudDialog open={dialog} onClose={() => changeDialogState(false)}>
-                            <UniversalForm {...form} />
+                            <CrudCreate config={config} form={form}/>
                         </CrudDialog>
                     </>
                 )}
             </CrudToolbar>
             {columns && (
-                <CrudTable<T> columns={columns} data={data?.data.data ?? []}>
+                <CrudTable<T> columns={columns} data={data?.data ?? []}>
                     <CrudTablePagination/>
                 </CrudTable>
             )}

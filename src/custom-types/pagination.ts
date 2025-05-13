@@ -1,4 +1,4 @@
-import {AxiosResponse} from "axios";
+// import {AxiosResponse} from "axios";
 
 export interface ResponseLinks {
     first?: string;
@@ -17,7 +17,8 @@ export interface ResponseMetadata {
 }
 
 export interface ResponseWithPagination<T> {
-    data: AxiosResponse<T[]>,
+    // data: AxiosResponse<T[]>,
+    data: T[],
     links: ResponseLinks,
     meta: ResponseMetadata,
     next: string,
