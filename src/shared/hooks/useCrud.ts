@@ -3,7 +3,7 @@ import {crudApi} from "@shared/api/crud/index.ts";
 import {ResponseWithPagination} from "@custom-types/pagination.ts";
 import {QueryParams} from "@custom-types/crud-list.ts";
 
-export const useCrud = <T>(url: string, query: QueryParams) => {
+export const useCrud = <T>(url: string, query?: QueryParams) => {
     const {
         data,
         error,

@@ -2,12 +2,10 @@ import {memo, ReactNode} from 'react'
 import {
     Dialog,
     DialogContent,
-    DialogFooter,
-    DialogClose,
     DialogHeader,
     DialogTitle,
+    DialogDescription
 } from "@shared/components/ui/dialog"
-import {Button} from "@shared/components/ui/button.tsx";
 import {useTranslation} from "react-i18next";
 
 interface DialogProps {
@@ -20,16 +18,12 @@ function CrudDialog({open, children, onClose}: DialogProps) {
     const {t} = useTranslation();
     return (
         <Dialog open={open} onOpenChange={onClose}>
-            <DialogContent>
+            <DialogContent className={"max-w lg:max-w-screen-md overflow-y-scroll max-h-screen"}>
                 <DialogHeader>
                     <DialogTitle>{t('create')}</DialogTitle>
                 </DialogHeader>
+                <DialogDescription/>
                 {children}
-                <DialogFooter>
-                    <DialogClose asChild={true}>
-                        <Button className={'bg-primary'}>{t('close')}</Button>
-                    </DialogClose>
-                </DialogFooter>
             </DialogContent>
         </Dialog>
     );

@@ -1,3 +1,5 @@
+import {Path} from 'react-hook-form';
+
 export enum FieldTypes {
     text = "text",
     textarea = "textarea",
@@ -11,7 +13,7 @@ export enum FieldTypes {
 }
 
 export interface SelectOptions {
-    value: string;
+    value: string | null;
     label: string;
 }
 
@@ -21,9 +23,9 @@ export interface FormFieldAttributes {
     items?: SelectOptions[]
 }
 
-export interface FormField {
-    label: string;
-    code: string;
+export interface FormField<T> {
+    code: Path<T>;
+    label?: string;
     type: FieldTypes;
     attributes?: FormFieldAttributes;
 }

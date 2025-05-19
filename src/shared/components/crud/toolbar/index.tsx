@@ -12,7 +12,7 @@ interface CrudToolbar {
     onRefresh?: () => void;
 }
 
-const CrudToolbar: FC<CrudToolbar> = memo(({isLoading, changeSearch, children, onRefresh}) => {
+const CrudToolbar: FC<CrudToolbar> = memo(({isLoading, hasSearch, changeSearch, children, onRefresh}) => {
     return (
 
         <div className={'flex flex-col md:flex-row md:items-center gap-2 md:gap-4'}>
@@ -27,8 +27,10 @@ const CrudToolbar: FC<CrudToolbar> = memo(({isLoading, changeSearch, children, o
                     </Button>
                 </div>
             </div>
-            <div className={'w-full md:flex-1'}><TableSearch onChange={changeSearch}/></div>
-            <div className={'hidden md:block'}>
+            {hasSearch && (
+                <div className={'w-full md:flex-1'}><TableSearch onChange={changeSearch}/></div>
+            )}
+            <div className={'hidden md:block ml-auto'}>
                 <Button variant={'secondary'} className={'hover:bg-primary hover:text-black'} disabled={isLoading}
                         onClick={onRefresh}>
                     <RefreshCwIcon className={cn({'animate-spin': isLoading})}/>
