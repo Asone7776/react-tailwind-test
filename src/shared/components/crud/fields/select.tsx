@@ -35,7 +35,6 @@ function FieldSelect<TFormValues extends FieldValues>({
     return (
         <div>
             {label && <label className="block mb-2">{label}</label>}
-
             <Controller
                 control={control}
                 name={code}

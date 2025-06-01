@@ -5,14 +5,17 @@ import CrudTable from "@shared/components/crud/table";
 import CrudTablePagination from "@shared/components/crud/table/pagination";
 import CrudDialog from "@shared/components/crud/dialog";
 import {Button} from "@shared/components/ui/button.tsx";
-import {PlusIcon} from "lucide-react";
+import {ListFilterIcon, PlusIcon} from "lucide-react";
 import CrudCreate from "@processes/crud/create";
+import FilterSheet from "@shared/components/crud/table/filters/filter-sheet.tsx";
 import {useCrud} from "@shared/hooks/useCrud.ts";
+import {clsx} from 'clsx';
 
 
 function CrudList<T, >({config, hasSearch, columns, form}: CrudListParams<T>) {
     const [query, setQuery] = useState<QueryParams>({});
     const [dialog, setDialog] = useState(false);
+    const [filterIsOpen, setFilterIsOpen] = useState(false);
     const {data, isLoading, refetch} = useCrud<T>(config.url, query);
 
 
@@ -33,6 +36,10 @@ function CrudList<T, >({config, hasSearch, columns, form}: CrudListParams<T>) {
         setDialog(value);
     }, [setDialog]);
 
+    const changeFilterState = useCallback((value: boolean) => {
+        setFilterIsOpen(value);
+    }, [setFilterIsOpen]);
+
 
     const onReload = useCallback(async () => {
         await refetch();
@@ -44,8 +51,14 @@ function CrudList<T, >({config, hasSearch, columns, form}: CrudListParams<T>) {
                 {form && (
                     <>
                         <Button onClick={() => changeDialogState(true)} variant={'secondary'}
-                                className={'ml-0 mr-auto hover:bg-primary hover:text-black'}>
+                                className={clsx(dialog && 'bg-primary text-black', "hover:bg-primary hover:text-black ml-0 mr-auto")}
+                        >
                             <PlusIcon/>
+                        </Button>
+                        <Button variant={'secondary'}
+                                className={clsx(filterIsOpen && 'bg-primary text-black', "hover:bg-primary hover:text-black")}
+                                onClick={() => changeFilterState(true)}>
+                            <ListFilterIcon/>
                         </Button>
                         <CrudDialog open={dialog} onClose={() => changeDialogState(false)}>
                             <CrudCreate config={config} form={form}/>
@@ -53,6 +66,10 @@ function CrudList<T, >({config, hasSearch, columns, form}: CrudListParams<T>) {
                     </>
                 )}
             </CrudToolbar>
+            <FilterSheet
+                open={filterIsOpen}
+                onOpenChange={changeFilterState}
+            />
             {columns && (
                 <CrudTable<T> columns={columns} data={data?.data ?? []}>
                     <CrudTablePagination/>

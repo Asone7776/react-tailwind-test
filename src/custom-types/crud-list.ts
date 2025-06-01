@@ -5,7 +5,8 @@ import {z, ZodTypeAny} from "zod";
 
 export interface CrudListForm {
     schema: z.ZodTypeAny,
-    fields: FormField<z.infer<ZodTypeAny>>[]
+    fields: FormField<z.infer<ZodTypeAny>>[],
+    defaultValues?: z.infer<ZodTypeAny>
 }
 
 export interface QueryParams {

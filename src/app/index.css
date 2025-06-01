@@ -138,4 +138,8 @@ html, body, #root {
     body {
         @apply bg-background text-foreground;
     }
+
+    img {
+        @apply max-w-full;
+    }
 }

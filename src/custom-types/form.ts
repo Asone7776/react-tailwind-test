@@ -6,20 +6,18 @@ export enum FieldTypes {
     radio = "radio",
     switch = "switch",
     select = "select",
-    date = "date",
-    datetime = "datetime",
     hidden = "hidden",
-    image_picker = "image-picker"
+    image_picker_single = "image-picker-single"
 }
 
 export interface SelectOptions {
-    value: string | null;
+    value: string;
     label: string;
 }
 
 export interface FormFieldAttributes {
     placeholder?: string;
-    type?: "text" | "password" | "email",
+    type?: "text" | "password" | "email" | "date" | "datetime-local";
     items?: SelectOptions[]
 }
 

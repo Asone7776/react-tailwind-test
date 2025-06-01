@@ -1,5 +1,5 @@
 import {FC, memo, ReactNode} from 'react';
-import {ListFilterIcon, RefreshCwIcon} from "lucide-react";
+import { RefreshCwIcon} from "lucide-react";
 import {Button} from "@shared/components/ui/button.tsx";
 import TableSearch from "@shared/components/search/table-search.tsx";
 import cn from 'clsx';
@@ -18,9 +18,6 @@ const CrudToolbar: FC<CrudToolbar> = memo(({isLoading, hasSearch, changeSearch, 
         <div className={'flex flex-col md:flex-row md:items-center gap-2 md:gap-4'}>
             <div className="flex gap-4">
                 {children}
-                <Button variant={'secondary'} className={"hover:bg-primary hover:text-black"}>
-                    <ListFilterIcon/>
-                </Button>
                 <div className={'md:hidden'}>
                     <Button variant={'secondary'} className={'hover:bg-primary hover:text-black'}>
                         <RefreshCwIcon/>
