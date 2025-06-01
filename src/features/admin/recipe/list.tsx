@@ -15,7 +15,6 @@ const RecipesList: FC = () => {
             fields,
             defaultValues: {
                 radio: "one",
-                fruit: "apple"
             } as RecipeFormType
         }
     }

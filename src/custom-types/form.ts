@@ -27,3 +27,8 @@ export interface FormField<T> {
     type: FieldTypes;
     attributes?: FormFieldAttributes;
 }
+
+export interface ValidationError {
+    message?: string;
+    type: "invalid_type"
+}
