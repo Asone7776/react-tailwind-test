@@ -3,7 +3,7 @@ import {AUTH_COOKIE_NAME} from "@utils/constants.ts";
 import Cookies from 'js-cookie';
 
 export const instance = axios.create({
-    baseURL: import.meta.env.BASE_URL,
+    baseURL: import.meta.env.VITE_BASE_URL,
 });
 
 instance.interceptors.request.use(
@@ -26,7 +26,7 @@ instance.interceptors.response.use(
     (error) => {
         const status = (error.response && error.response.status) || 0;
         if (status === 401 && window.location.pathname !== "/") {
-            Cookies.remove("token");
+            Cookies.remove(AUTH_COOKIE_NAME);
             window.location.href = '/';
         }
         return Promise.reject(error)

@@ -58,7 +58,6 @@ function UniversalForm<TSchema extends z.ZodTypeAny>({
         <form onSubmit={handleSubmit(submitAction)} className="flex flex-col gap-y-4">
             {fields.map((field) => {
                 const Component = fieldComponents[field.type as keyof typeof fieldComponents] || FieldInput;
-
                 return (
                     <Fragment key={field.code}>
                         <Component

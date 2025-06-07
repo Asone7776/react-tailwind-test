@@ -6,11 +6,13 @@ import {Label} from "@shared/components/ui/label"
 import {EyeIcon, EyeOff} from 'lucide-react';
 import {ButtonClick} from "@custom-types/events.ts";
 import ValidationAlert from "@shared/components/alert/validation";
-import {useNavigate} from "react-router";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {LoginSchema, LoginFormFields} from "@features/auth/login/model/validation.ts";
+import {LoginFormFields, LoginSchema} from "@features/auth/login/model/validation.ts";
 import {useTranslation} from "react-i18next";
+import DefaultButton from "@shared/components/button/default.tsx";
+import {ButtonTypes} from "@custom-types/enums.ts";
+import {useAuth} from "@shared/hooks/useAuth.ts";
 
 
 function LoginForm({
@@ -18,9 +20,11 @@ function LoginForm({
                        ...props
                    }: React.ComponentPropsWithoutRef<"form">) {
 
-    const navigate = useNavigate();
+    const {loading, login} = useAuth();
     const {t} = useTranslation();
+
     const [passwordType, setPasswordType] = useState('password');
+
     const passwordIcon = passwordType === 'password' ? <EyeOff/> : <EyeIcon/>;
 
     const togglePassword = (event: ButtonClick) => {
@@ -28,11 +32,8 @@ function LoginForm({
         setPasswordType((value) => value === 'text' ? 'password' : 'text');
     }
 
-    const handleLogin: SubmitHandler<LoginFormFields> = (data) => {
-        console.log(data);
-        navigate('/admin', {
-            viewTransition: true
-        });
+    const handleLogin: SubmitHandler<LoginFormFields> = async (data) => {
+        await login(data);
     }
 
     const {register, handleSubmit, formState: {errors}} = useForm<LoginFormFields>({
@@ -64,9 +65,8 @@ function LoginForm({
                     </div>
                     {errors?.password?.message && <ValidationAlert>{errors.password.message}</ValidationAlert>}
                 </div>
-                <Button type="submit" className="w-full">
-                    {t('enter')}
-                </Button>
+                <DefaultButton disabled={loading} loading={loading} type={ButtonTypes.submit} className="w-full"
+                               title={t('enter')}/>
             </div>
         </form>
     )
