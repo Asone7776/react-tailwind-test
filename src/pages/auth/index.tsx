@@ -1,9 +1,7 @@
 import Login from '@features/auth/login';
 
 function Index() {
-    return (
-        <Login/>
-    );
+  return <Login />;
 }
 
 export default Index;

@@ -1,15 +1,15 @@
-import {Suspense} from "react";
-import {Outlet} from "react-router";
-import GlobalLoading from "@shared/components/loading/global.tsx";
+import { Suspense } from 'react';
+import { Outlet } from 'react-router';
+import GlobalLoading from '@shared/components/loading/global.tsx';
 
 function AuthLayout() {
-    return (
-        <main>
-            <Suspense fallback={<GlobalLoading/>}>
-                <Outlet/>
-            </Suspense>
-        </main>
-    );
+  return (
+    <main>
+      <Suspense fallback={<GlobalLoading />}>
+        <Outlet />
+      </Suspense>
+    </main>
+  );
 }
 
 export default AuthLayout;

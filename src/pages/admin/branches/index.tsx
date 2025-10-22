@@ -1,7 +1,5 @@
 function BranchesPage() {
-    return (
-        <div>Branches</div>
-    );
+  return <div>Branches</div>;
 }
 
 export default BranchesPage;
