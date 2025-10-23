@@ -8,6 +8,7 @@ const Companies = lazy(() => import('@pages/admin/companies'));
 const Branches = lazy(() => import('@pages/admin/branches'));
 const Orders = lazy(() => import('@pages/admin/orders'));
 const Roles = lazy(() => import('@pages/admin/roles'));
+const Profile = lazy(() => import('@pages/admin/profile'));
 
 const Default = lazy(() => import('@layouts/default'));
 const AuthLayout = lazy(() => import('@layouts/auth'));
@@ -33,6 +34,11 @@ export const router = createBrowserRouter([
       },
       { path: ROUTES.ORDERS, Component: Orders, handle: { title: 'Заказы' } },
       { path: ROUTES.ROLES, Component: Roles, handle: { title: 'Роли' } },
+      {
+        path: ROUTES.PROFILE,
+        Component: Profile,
+        handle: { title: 'Профиль' },
+      },
     ],
   },
   {

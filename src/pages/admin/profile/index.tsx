@@ -1,0 +1,16 @@
+import ProfileCards from '@widgets/profile/card.tsx';
+import { useProfile } from '@/store/profile-store.ts';
+
+function ProfilePage() {
+  const { profile } = useProfile();
+  return (
+    <div className="@container/main flex flex-1 flex-col gap-2">
+      <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+        <ProfileCards user={profile} />
+        <div className="px-4 lg:px-6"></div>
+      </div>
+    </div>
+  );
+}
+
+export default ProfilePage;

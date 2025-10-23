@@ -42,6 +42,10 @@ function LoginForm({
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormFields>({
+    defaultValues: {
+      email: 'asone7776@gmail.com',
+      password: '903258241',
+    },
     resolver: zodResolver(LoginSchema),
   });
 
