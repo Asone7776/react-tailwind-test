@@ -9,6 +9,7 @@ const Branches = lazy(() => import('@pages/admin/branches'));
 const Orders = lazy(() => import('@pages/admin/orders'));
 const Roles = lazy(() => import('@pages/admin/roles'));
 const Profile = lazy(() => import('@pages/admin/profile'));
+const CarTypes = lazy(() => import('@pages/admin/car-types'));
 
 const Default = lazy(() => import('@layouts/default'));
 const AuthLayout = lazy(() => import('@layouts/auth'));
@@ -38,6 +39,11 @@ export const router = createBrowserRouter([
         path: ROUTES.PROFILE,
         Component: Profile,
         handle: { title: 'Профиль' },
+      },
+      {
+        path: ROUTES.CAR_TYPES,
+        Component: CarTypes,
+        handle: { title: 'Типы автомобилей' },
       },
     ],
   },

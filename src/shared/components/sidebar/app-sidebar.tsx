@@ -9,6 +9,7 @@ import {
   ShieldCheckIcon,
   ShoppingCartIcon,
   Wrench,
+  Car,
 } from 'lucide-react';
 
 import { NavMain } from '@shared/components/navigation/main';
@@ -21,44 +22,51 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarGroup,
+  SidebarGroupLabel,
 } from '@shared/components/ui/sidebar';
 
 import { Link } from 'react-router';
 
-const data = {
-  user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
+// Навигационные секции
+const navigationGroups = [
+  {
+    label: 'Управление',
+    items: [
+      { title: 'Главная', url: `/${ROUTES.MAIN}/`, icon: HomeIcon },
+      {
+        title: 'Компании',
+        url: `/${ROUTES.MAIN}/${ROUTES.COMPANIES}`,
+        icon: Building2Icon,
+      },
+      {
+        title: 'Филиалы',
+        url: `/${ROUTES.MAIN}/${ROUTES.BRANCHES}`,
+        icon: NetworkIcon,
+      },
+      {
+        title: 'Роли',
+        url: `/${ROUTES.MAIN}/${ROUTES.ROLES}`,
+        icon: ShieldCheckIcon,
+      },
+      {
+        title: 'Заказы',
+        url: `/${ROUTES.MAIN}/${ROUTES.ORDERS}`,
+        icon: ShoppingCartIcon,
+      },
+    ],
   },
-  navMain: [
-    {
-      title: 'Главная',
-      url: `/${ROUTES.MAIN}/`,
-      icon: HomeIcon,
-    },
-    {
-      title: 'Компании',
-      url: `/${ROUTES.MAIN}/${ROUTES.COMPANIES}`,
-      icon: Building2Icon,
-    },
-    {
-      title: 'Филиалы',
-      url: `/${ROUTES.MAIN}/${ROUTES.BRANCHES}`,
-      icon: NetworkIcon,
-    },
-    {
-      title: 'Роли',
-      url: `/${ROUTES.MAIN}/${ROUTES.ROLES}`,
-      icon: ShieldCheckIcon,
-    },
-    {
-      title: 'Заказы',
-      url: `/${ROUTES.MAIN}/${ROUTES.ORDERS}`,
-      icon: ShoppingCartIcon,
-    },
-  ],
-};
+  {
+    label: 'Администрирование',
+    items: [
+      {
+        title: 'Типы автомобилей',
+        url: `/${ROUTES.MAIN}/${ROUTES.CAR_TYPES}`,
+        icon: Car,
+      },
+    ],
+  },
+];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -82,10 +90,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        {navigationGroups.map((group) => (
+          <SidebarGroup key={group.label}>
+            <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+            <NavMain items={group.items} />
+          </SidebarGroup>
+        ))}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   );

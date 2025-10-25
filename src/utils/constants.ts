@@ -8,6 +8,7 @@ export const ROUTES = {
   ORDERS: 'orders',
   ROLES: 'roles',
   AUTH: 'auth',
+  CAR_TYPES: 'car-types',
   INDEX: '/',
   ALL: '*',
 };

@@ -1,16 +1,15 @@
-import ProfileCards from '@widgets/profile/card.tsx';
-import { useProfile } from '@/store/profile-store.ts';
+import ProfileInfo from '@widgets/profile/cards/info.tsx';
+import ProfileTabs from '@widgets/profile/cards/tabs.tsx';
 
-function ProfilePage() {
-  const { profile } = useProfile();
+export default function ProfilePage() {
   return (
-    <div className="@container/main flex flex-1 flex-col gap-2">
-      <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-        <ProfileCards user={profile} />
-        <div className="px-4 lg:px-6"></div>
+    <div className="grid grid-cols-3 gap-4 h-full">
+      <div className="col-span-1">
+        <ProfileInfo />
+      </div>
+      <div className="col-span-2">
+        <ProfileTabs />
       </div>
     </div>
   );
 }
-
-export default ProfilePage;
