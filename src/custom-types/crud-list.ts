@@ -1,13 +1,5 @@
-import { ModelEntity } from '@shared/api/crud/models.ts';
-import { FormField } from '@custom-types/form.ts';
 import { ColumnDef } from '@tanstack/react-table';
-import { z, ZodTypeAny } from 'zod';
-
-export interface CrudListForm {
-  schema: z.ZodTypeAny;
-  fields: FormField<z.infer<ZodTypeAny>>[];
-  defaultValues?: z.infer<ZodTypeAny>;
-}
+import { ResponseWithPagination } from '@custom-types/pagination.ts';
 
 export interface QueryParams {
   search?: string;
@@ -16,10 +8,10 @@ export interface QueryParams {
 }
 
 export interface CrudListParams<T> {
-  config: ModelEntity;
+  data?: ResponseWithPagination<T>;
   hasSearch?: boolean;
-  hasAdd?: boolean;
   hasDelete?: boolean;
+  isLoading?: boolean;
   columns?: ColumnDef<T>[];
-  form?: CrudListForm;
+  children?: React.ReactNode;
 }

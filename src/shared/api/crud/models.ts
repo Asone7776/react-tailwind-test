@@ -6,6 +6,7 @@ export enum Models {
   order = 'order',
   //     Test
   recipe = 'recipe',
+  car_type = 'car_type',
 }
 
 export interface ModelEntity {
@@ -38,5 +39,9 @@ export const ModelConfig: Record<Models, ModelEntity> = {
     name: Models.recipe,
     // url: 'https://dummyjson.com/recipes',
     url: 'https://dummyjson.com/c/77bf-2da2-4b41-a207',
+  },
+  car_type: {
+    name: Models.car_type,
+    url: 'car-types',
   },
 };
