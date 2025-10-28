@@ -11,6 +11,7 @@ function CrudList<T>({
   isLoading,
   data,
   children,
+  onRefetch,
 }: CrudListParams<T>) {
   const [filterIsOpen, setFilterIsOpen] = useState(false);
 
@@ -32,9 +33,11 @@ function CrudList<T>({
     [setFilterIsOpen],
   );
 
-  const onReload = useCallback(async () => {
-    // await refetch();
-  }, []);
+  const onReload = useCallback(() => {
+    if (onRefetch) {
+      onRefetch();
+    }
+  }, [onRefetch]);
 
   return (
     <div className={'flex flex-col gap-4'}>
@@ -73,7 +76,7 @@ function CrudList<T>({
         {/*  </>*/}
         {/*)}*/}
       </CrudToolbar>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      {/*<pre>{JSON.stringify(data, null, 2)}</pre>*/}
       <FilterSheet open={filterIsOpen} onOpenChange={changeFilterState} />
       {columns && (
         <CrudTable<T> columns={columns} data={data?.data ?? []}>

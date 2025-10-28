@@ -12,6 +12,7 @@ export interface CrudListParams<T> {
   hasSearch?: boolean;
   hasDelete?: boolean;
   isLoading?: boolean;
+  onRefetch?: () => void;
   columns?: ColumnDef<T>[];
   children?: React.ReactNode;
 }

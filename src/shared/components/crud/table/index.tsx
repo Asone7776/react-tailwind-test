@@ -39,7 +39,7 @@ function CrudTable<TData>({ columns, data, children }: DataTableProps<TData>) {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead className={'truncate'} key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(

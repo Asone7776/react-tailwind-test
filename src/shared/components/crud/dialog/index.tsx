@@ -5,24 +5,28 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
+  DialogTrigger,
 } from '@shared/components/ui/dialog';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@shared/components/ui/button.tsx';
 
 interface DialogProps {
-  open: boolean;
-  onClose: () => void;
+  title?: string;
+  onClose?: () => void;
   children?: ReactNode;
 }
 
-function CrudDialog({ open, children, onClose }: DialogProps) {
+function CrudDialog({ title = 'create', children, onClose }: DialogProps) {
   const { t } = useTranslation();
+  const translated_title = t(`${title}`);
   return (
-    <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent
-        className={'max-w lg:max-w-screen-md overflow-y-scroll max-h-screen'}
-      >
+    <Dialog onOpenChange={onClose}>
+      <DialogTrigger asChild>
+        <Button>{translated_title}</Button>
+      </DialogTrigger>
+      <DialogContent className={'max-w lg:max-w-screen-md max-h-screen'}>
         <DialogHeader>
-          <DialogTitle>{t('create')}</DialogTitle>
+          <DialogTitle>{translated_title}</DialogTitle>
         </DialogHeader>
         <DialogDescription />
         {children}
