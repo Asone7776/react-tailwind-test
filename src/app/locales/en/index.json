@@ -1,5 +1,14 @@
 {
   "translation": {
-    "test": "Home"
+    "enter_account": "Войти в аккаунт",
+    "send": "Отправить",
+    "enter": "Войти",
+    "create": "Создать",
+    "close": "Закрыть",
+    "no_data": "Нет данных",
+    "fields": {
+      "email": "Email",
+      "password": "Пароль"
+    }
   }
 }

@@ -14,6 +14,7 @@ i18n
       en,
       uz,
     },
+    supportedLngs: ['ru', 'en', 'uz'],
     fallbackLng: 'uz',
     interpolation: {
       escapeValue: false,
