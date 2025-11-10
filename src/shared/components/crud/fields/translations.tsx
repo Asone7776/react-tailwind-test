@@ -22,8 +22,8 @@ const FieldTranslation = <TFormValues extends FieldValues>({
   attributes,
 }: FieldTranslationProps<TFormValues>) => {
   const { i18n } = useTranslation();
-  const supportedLangs = i18n.options?.supportedLngs as string[];
-  const filteredLanguages = supportedLangs.filter((l) => l !== 'cimode');
+  const supportedLanguages = i18n.options?.supportedLngs as string[];
+  const filteredLanguages = supportedLanguages.filter((l) => l !== 'cimode');
 
   return (
     <div className="grid gap-4">
