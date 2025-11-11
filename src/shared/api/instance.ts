@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { AUTH_COOKIE_NAME } from '@utils/constants.ts';
 import Cookies from 'js-cookie';
+import { toast } from 'sonner';
 
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -25,6 +26,15 @@ instance.interceptors.response.use(
     return response;
   },
   (error) => {
+    if (error.response?.data?.message) {
+      if (Array.isArray(error.response.data?.message)) {
+        for (const message in error.response.data?.message) {
+          toast.error(message);
+        }
+        return;
+      }
+      toast.error(error.response.data?.message);
+    }
     const status = (error.response && error.response.status) || 0;
     if (status === 401 && window.location.pathname !== '/') {
       Cookies.remove(AUTH_COOKIE_NAME);

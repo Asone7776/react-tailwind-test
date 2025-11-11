@@ -2,7 +2,12 @@ import { Input } from '@shared/components/ui/input';
 import { Path, FieldValues, Control } from 'react-hook-form';
 import { FormFieldAttributes } from '@custom-types/form.ts';
 import { useTranslation } from 'react-i18next';
-import { FormControl, FormField } from '@shared/components/ui/form.tsx';
+import {
+  FormControl,
+  FormField,
+  FormLabel,
+  FormMessage,
+} from '@shared/components/ui/form.tsx';
 import {
   Accordion,
   AccordionContent,
@@ -34,24 +39,28 @@ const FieldTranslation = <TFormValues extends FieldValues>({
         defaultValue={filteredLanguages[0]}
       >
         {filteredLanguages.map((lang, index) => (
-          <AccordionItem value={lang} key={lang}>
-            <AccordionTrigger>
-              {`Название (${lang.toUpperCase()})`}
-            </AccordionTrigger>
-            <AccordionContent>
-              <FormField
-                control={control}
-                name={`${code}.${index}.title` as Path<TFormValues>}
-                render={({ field }) => (
+          <FormField
+            key={lang}
+            control={control}
+            name={`${code}.${index}.title` as Path<TFormValues>}
+            render={({ field }) => (
+              <AccordionItem value={lang}>
+                <AccordionTrigger
+                  className={'hover:no-underline focus:no-underline'}
+                >
+                  <FormLabel> {`Название (${lang.toUpperCase()})`}</FormLabel>
+                </AccordionTrigger>
+                <AccordionContent className={'flex flex-col gap-4'}>
                   <>
                     <FormControl>
                       <Input {...field} {...attributes} />
                     </FormControl>
+                    <FormMessage />
                   </>
-                )}
-              />
-            </AccordionContent>
-          </AccordionItem>
+                </AccordionContent>
+              </AccordionItem>
+            )}
+          />
         ))}
       </Accordion>
     </div>

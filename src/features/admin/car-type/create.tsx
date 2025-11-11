@@ -11,12 +11,18 @@ import {
   FormControl,
   FormField,
   FormLabel,
+  FormMessage,
 } from '@shared/components/ui/form';
 import { Input } from '@shared/components/ui/input';
 import { t } from 'i18next';
 import FieldTranslation from '@shared/components/crud/fields/translations.tsx';
+import { useAddCarType } from '@entities/car-type/hooks/useAddCarType.ts';
+import { useEffect } from 'react';
+import { useQueryParams } from '@app/hooks/use-query-params.ts';
 
 function CreateCarType() {
+  const { mutate: create, isSuccess } = useAddCarType();
+  const { remove } = useQueryParams();
   const form = useForm<CreateCarTypeSchemaType>({
     resolver: zodResolver(CreateCarTypeSchema),
     defaultValues: {
@@ -37,11 +43,17 @@ function CreateCarType() {
       ],
     },
   });
-  const { handleSubmit } = form;
+  const { handleSubmit, reset } = form;
 
   const onSubmit: SubmitHandler<CreateCarTypeSchemaType> = (data) => {
-    console.log(data);
+    create(data);
   };
+  useEffect(() => {
+    if (isSuccess) {
+      reset();
+      remove('createDialog');
+    }
+  }, [isSuccess, remove, reset]);
 
   return (
     <>
@@ -58,6 +70,7 @@ function CreateCarType() {
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
+                    <FormMessage />
                   </>
                 )}
               />
